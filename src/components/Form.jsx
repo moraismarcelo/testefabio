@@ -7,13 +7,11 @@ export default function App() {
 
     const { register, errors, handleSubmit } = useForm();
 
-        /*if (sessionStorage.getItem("contacts")){
-            const onSubmit = data => sessionStorage.setItem("contacts", (sessionStorage.getItem("contacts"))+JSON.stringify(data));
-        }else{
-            const onSubmit = data => sessionStorage.setItem("contacts", JSON.stringify(data));
-        }*/
     const onSubmit = data => sessionStorage.setItem("contacts", JSON.stringify(data));
+
+
     return (
+
         <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
                 <Label for="name">Nome</Label>

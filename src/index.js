@@ -7,12 +7,11 @@ import Search from "./components/Search"
 
 
 
-
 ReactDOM.render(
     <div className={"container"} >
         <Nav/>
-        <Form/>
-        <Search/>
+        {/*<Form/>
+        <Search/>*/}
     </div>
     , document.getElementById('root')
 );

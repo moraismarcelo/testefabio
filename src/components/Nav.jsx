@@ -1,23 +1,38 @@
 import React from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, Button } from 'reactstrap';
+import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import Search from"./Search";
+import Form from "./Form"
+
 
 const Example = (props) => {
     return (
         <div>
-            <h1 >Web Agenda</h1>
+            <h1 >Agenda</h1>
             <hr />
-
+            <Router>
             <Nav>
-                <NavItem>
-                    <NavLink href="#">Cadastrar Contato</NavLink>
+                <NavItem className={"p-1"}>
+                    <Link to="/cadastrar"><Button color={"success"}>Cadastrar Contato</Button></Link>
                 </NavItem>
-                <NavItem>
-                    <NavLink href="#">Consultar Contato</NavLink>
+                <NavItem className={"p-1"}>
+                    <Link to="/consultar"><Button color={"primary"}>Consultar Contato</Button></Link>
                 </NavItem>
-
             </Nav>
-            <hr />
+            <Switch>
+                <Route exact path="/">
+                    <Nav/>
+                </Route>
+                <Route path="/cadastrar">
+                    <Form/>
+                </Route>
+                <Route path="/consultar">
+                <Search/>
+                </Route>
+            </Switch>
 
+            </Router>
+            <hr />
         </div>
     );
 }
