@@ -2,11 +2,7 @@ import React from 'react';
 import {FormGroup, Label, Input, Table} from 'reactstrap'
 
 const Example = () => {
-    const retrievedData = sessionStorage.getItem('contacts');
-    let contacts = JSON.parse(retrievedData);
-    if (!retrievedData){
 
-    }
     return (
         <>
         <FormGroup>
@@ -29,11 +25,11 @@ const Example = () => {
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{contacts ? contacts.name : "1"}</th>
 
-                    <td>{contacts.name}</td>
-                    <td>{contacts.phone}</td>
-                    <td>{contacts.email}</td>
+                    <td>{contacts ? contacts.name : null}</td>
+                    <td>{contacts ? contacts.phone : null}</td>
+                    <td>{contacts ? contacts.email : null}</td>
                 </tr>
                 </tbody>
             </Table>

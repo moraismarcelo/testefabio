@@ -4,14 +4,16 @@ import {useForm} from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message'
 
 export default function App() {
-
     const { register, errors, handleSubmit } = useForm();
-
-    const onSubmit = data => sessionStorage.setItem("contacts", JSON.stringify(data));
-
-
+    function submit(data) {
+        console.log(data)
+        var contacts = sessionStorage.getItem("contacts") || [];
+        var values = []
+        values.push(data, contacts)
+        sessionStorage.setItem("contacts", JSON.stringify(values).replace(/\\/g,""));
+    }
+    const onSubmit = data => submit(data);
     return (
-
         <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
                 <Label for="name">Nome</Label>
