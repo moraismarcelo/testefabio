@@ -6,11 +6,10 @@ import { ErrorMessage } from '@hookform/error-message'
 export default function App() {
     const { register, errors, handleSubmit } = useForm();
     function submit(data) {
-        console.log(data)
-        var contacts = sessionStorage.getItem("contacts") || [];
-        var values = []
-        values.push(data, contacts)
-        sessionStorage.setItem("contacts", JSON.stringify(values).replace(/\\/g,""));
+        const sessionContacts = sessionStorage.getItem("contacts")
+        const contacts = sessionContacts ? JSON.parse(sessionContacts) :  [];
+        const values = [...contacts, data]
+        sessionStorage.setItem("contacts", JSON.stringify(values));
     }
     const onSubmit = data => submit(data);
     return (

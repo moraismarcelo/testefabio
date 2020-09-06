@@ -1,8 +1,17 @@
 import React from 'react';
-import {FormGroup, Label, Input, Table} from 'reactstrap'
-
+import {FormGroup, Label, Input, Table, Button} from 'reactstrap';
+import { } from 'react-icons/bs';
 const Example = () => {
+    const retrievedData = sessionStorage.getItem('contacts');
+    const contacts = JSON.parse(retrievedData);
+    function addRow(contacts) {
 
+    }
+    if (retrievedData){
+        for (const [key, value] of Object.entries(contacts)) {
+            console.log(key, value);
+        }
+    }
     return (
         <>
         <FormGroup>
@@ -21,15 +30,18 @@ const Example = () => {
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Email</th>
+                    <th>Ações</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id={"tableData"}>
                 <tr>
-                    <th scope="row">{contacts ? contacts.name : "1"}</th>
-
-                    <td>{contacts ? contacts.name : null}</td>
-                    <td>{contacts ? contacts.phone : null}</td>
-                    <td>{contacts ? contacts.email : null}</td>
+                    <th scope="row">#</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><Button className={"btn btn-info"}>Editar</Button>
+                        <Button className={"btn btn-danger"}>Remover</Button>
+                    </td>
                 </tr>
                 </tbody>
             </Table>
