@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button , Form, FormGroup, Label} from 'reactstrap'
+import {Button, Form, FormGroup, Label, Col, Row} from 'reactstrap'
 import {useForm} from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message'
 
@@ -21,6 +21,8 @@ export default function App() {
     const onSubmit = data => submit(data);
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
+            <Row form>
+            <Col md={3}>
             <FormGroup>
                 <Label for="name">Nome</Label>
                 <input
@@ -33,7 +35,9 @@ export default function App() {
                         required: 'Por favor insira um nome.'})}
                 />
                 <ErrorMessage errors={errors} name="name" />
-            </FormGroup>
+                </FormGroup>
+            </Col>
+            <Col md={2}>
             <FormGroup>
                 <Label for="phone">Telefone</Label>
                 <input
@@ -61,8 +65,10 @@ export default function App() {
                     }
                 />
                 <ErrorMessage errors={errors} name="phone" />
-            </FormGroup>
-            <FormGroup>
+                </FormGroup>
+                </Col>
+                <Col md={3}>
+                <FormGroup>
                 <Label for="email">Email</Label>
                 <input
                     className={"form-control"}
@@ -80,6 +86,8 @@ export default function App() {
                 />
                 <ErrorMessage errors={errors} name="email" />
             </FormGroup>
+            </Col>           
+            </Row>
             <Button className={"btn-success"}>Salvar</Button>
         </Form>
     );
