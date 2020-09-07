@@ -1,16 +1,23 @@
 import React from 'react';
-import {FormGroup, Label, Input, Table, Button} from 'reactstrap';
-import { } from 'react-icons/bs';
+import {FormGroup, Label, Input, Table} from 'reactstrap';
+import {BsFillTrashFill, BsPencilSquare} from 'react-icons/bs';
+
 const Example = () => {
     const retrievedData = sessionStorage.getItem('contacts');
     const contacts = JSON.parse(retrievedData);
-    function addRow(contacts) {
-
-    }
-    if (retrievedData){
-        for (const [key, value] of Object.entries(contacts)) {
-            console.log(key, value);
-        }
+    const renderContacts = (contacts, index) => {
+        console.log(index)
+        return (
+        <tr key={index}>
+            <td>{contacts.name}</td>
+            <td>{contacts.phone}</td>
+            <td>{contacts.email}</td>
+            <td>
+                <BsPencilSquare className="mr-1" title="Editar"></BsPencilSquare>
+                <BsFillTrashFill title="Excluir"></BsFillTrashFill>
+            </td>    
+        </tr>
+        )
     }
     return (
         <>
@@ -23,30 +30,20 @@ const Example = () => {
                 placeholder="Nome, telefone, email "
             />
         </FormGroup>
-            <Table striped>
+            <Table hover responsive>
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Email</th>
                     <th>Ações</th>
                 </tr>
                 </thead>
-                <tbody id={"tableData"}>
-                <tr>
-                    <th scope="row">#</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td><Button className={"btn btn-info"}>Editar</Button>
-                        <Button className={"btn btn-danger"}>Remover</Button>
-                    </td>
-                </tr>
+                <tbody>
+                    {contacts.map(renderContacts)}
                 </tbody>
             </Table>
          </>
     );
 }
-
 export default Example;
