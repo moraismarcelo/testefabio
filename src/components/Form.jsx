@@ -11,13 +11,13 @@ export default function App() {
         const values = [...contacts, data]
         sessionStorage.setItem("contacts", JSON.stringify(values));
         resetFields()
+        window.location.reload()
     }
     function resetFields(){
         document.getElementById('name').value='';
         document.getElementById('phone').value='';
         document.getElementById('email').value='';
     }
-    
     const onSubmit = data => submit(data);
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>

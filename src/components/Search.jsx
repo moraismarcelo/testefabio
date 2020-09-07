@@ -5,8 +5,10 @@ import {BsFillTrashFill, BsPencilSquare} from 'react-icons/bs';
 const Example = () => {
     const retrievedData = sessionStorage.getItem('contacts');
     const contacts = JSON.parse(retrievedData);
+    function deleteContact (contacts){
+        console.log(contacts)
+    }
     const renderContacts = (contacts, index) => {
-        console.log(index)
         return (
         <tr key={index}>
             <td>{contacts.name}</td>
@@ -14,7 +16,7 @@ const Example = () => {
             <td>{contacts.email}</td>
             <td>
                 <BsPencilSquare className="mr-1" title="Editar"></BsPencilSquare>
-                <BsFillTrashFill title="Excluir"></BsFillTrashFill>
+                <BsFillTrashFill title="Excluir" onClick={deleteContact}></BsFillTrashFill>
             </td>    
         </tr>
         )
