@@ -10,7 +10,14 @@ export default function App() {
         const contacts = sessionContacts ? JSON.parse(sessionContacts) :  [];
         const values = [...contacts, data]
         sessionStorage.setItem("contacts", JSON.stringify(values));
+        resetFields()
     }
+    function resetFields(){
+        document.getElementById('name').value='';
+        document.getElementById('phone').value='';
+        document.getElementById('email').value='';
+    }
+    
     const onSubmit = data => submit(data);
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
