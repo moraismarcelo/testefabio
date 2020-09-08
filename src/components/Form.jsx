@@ -13,6 +13,12 @@ export default function App() {
         resetFields()
         window.location.reload()
     }
+    function addContacts(e){
+        let index = 1
+        let row = document.getElementById("fieldsContainer")
+        e.preventDefault()
+        console.log(index, row)
+    }
     function resetFields(){
         document.getElementById('name').value='';
         document.getElementById('phone').value='';
@@ -21,6 +27,7 @@ export default function App() {
     const onSubmit = data => submit(data);
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
+            <div className="fieldsContainer" id="fieldsContainer">
             <Row form>
             <Col md={3}>
             <FormGroup>
@@ -28,7 +35,7 @@ export default function App() {
                 <input
                     className={"form-control"}
                     type="input"
-                    name="name"
+                    name="name[]"
                     id="name"
                     placeholder="João da Silva"
                     ref={register({
@@ -37,14 +44,14 @@ export default function App() {
                 <ErrorMessage errors={errors} name="name" />
                 </FormGroup>
             </Col>
-            <Col md={2}>
+            <Col md={3}>
             <FormGroup>
                 <Label for="phone">Telefone</Label>
                 <input
                     className={"form-control"}
                     maxLength={14}
                     type="input"
-                    name="phone"
+                    name="phone[]"
                     id="phone"
                     placeholder="Somente Números"
                     ref={register({
@@ -73,7 +80,7 @@ export default function App() {
                 <input
                     className={"form-control"}
                     type="text"
-                    name="email"
+                    name="email[]"
                     id="email"
                     placeholder="joao@email.com.br"
                     ref={register({
@@ -86,9 +93,12 @@ export default function App() {
                 />
                 <ErrorMessage errors={errors} name="email" />
             </FormGroup>
-            </Col>           
+             </Col>
             </Row>
-            <Button className={"btn-success"}>Salvar</Button>
+            <Button className={"btn-success mr-2"}>Salvar</Button>
+            <Button className={"btn-info"} onClick={addContacts}>+ Contatos</Button>
+            
+        </div>            
         </Form>
     );
 }
