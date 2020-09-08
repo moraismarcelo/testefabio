@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Form, FormGroup, Label, Col, Row} from 'reactstrap'
 import {useForm} from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message'
+import $ from 'jquery'
 
 export default function App() {
     const { register, errors, handleSubmit } = useForm();
@@ -14,10 +15,8 @@ export default function App() {
         window.location.reload()
     }
     function addContacts(e){
-        let index = 1
-        let row = document.getElementById("fieldsContainer")
         e.preventDefault()
-        console.log(index, row)
+        console.log(this)
     }
     function resetFields(){
         document.getElementById('name').value='';
@@ -35,7 +34,7 @@ export default function App() {
                 <input
                     className={"form-control"}
                     type="input"
-                    name="name[]"
+                    name="name"
                     id="name"
                     placeholder="João da Silva"
                     ref={register({
@@ -51,7 +50,7 @@ export default function App() {
                     className={"form-control"}
                     maxLength={14}
                     type="input"
-                    name="phone[]"
+                    name="phone"
                     id="phone"
                     placeholder="Somente Números"
                     ref={register({
@@ -80,7 +79,7 @@ export default function App() {
                 <input
                     className={"form-control"}
                     type="text"
-                    name="email[]"
+                    name="email"
                     id="email"
                     placeholder="joao@email.com.br"
                     ref={register({
@@ -97,7 +96,6 @@ export default function App() {
             </Row>
             <Button className={"btn-success mr-2"}>Salvar</Button>
             <Button className={"btn-info"} onClick={addContacts}>+ Contatos</Button>
-            
         </div>            
         </Form>
     );
