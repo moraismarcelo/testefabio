@@ -7,33 +7,52 @@ import $ from 'jquery'
 export default function App() {
     const { register, errors, handleSubmit } = useForm();
     function submit(data) {
+        let n = $("#fieldsContainer #formRow").length;
+        if (n > 0 ){
+           $("#fieldsContainer #formRow input").each(function(){
+           let inputs = $(this).val()
+           alert(inputs)
+           })
+        }
         const sessionContacts = sessionStorage.getItem("contacts")
         const contacts = sessionContacts ? JSON.parse(sessionContacts) :  [];
         const values = [...contacts, data]
         sessionStorage.setItem("contacts", JSON.stringify(values));
         resetFields()
-        window.location.reload()
+        //window.location.reload()
     }
     function addContactFields(){
-    let html = '<div class="form-group" id="addContacts"><div class="form-row">' +
-     '<div class="col-3 input-group-sm">' +
-     '<label for="validationCustom01" class="small">Nome</label>' +
-     '<input type="text" class="form-control" id="validationCustom01" placeholder="Nome" required></div>' +
-     '<div class="col-3 input-group-sm">' +
-     '<label for="validationCustom01" class="small">Telefone</label>' +
-     '<input type="text" class="form-control" id="validationCustom01" placeholder="Nome" required></div>' +
-     '<div class="col-3 input-group-sm mr-1">' +
-     '<label for="validationCustom01" class="small">Email</label>' +
-     '<input type="text" class="form-control" id="validationCustom01" placeholder="Nome" required></div>' +
-     '<button class="btn btn-danger btn-sm">Remover</button></div></div>';
-
-     const fieldsContainer = $(".fieldsContainer")
+        /*let  html2 = '';
+        html2 += '<div id="inputFormRow">';
+        html2 += '<div class="input-group mb-3">';
+        html2 += '<input type="text" name="title[]" class="form-control m-input" placeholder="Enter title" autocomplete="off">';
+        html2 += '<div class="input-group-append">';
+        html2 += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+        html2 += '</div>';
+        html2 += '</div>';*/
+    
+    let n = $("#fieldsContainer #formRow").length;
+    let html =''
+    html += '<div class="form-group" id="addContacts"><div class="form-row" id= "formRow">'
+    html += '<div class="col-3 input-group-sm">'
+    html += '<label for="validationCustom01" class="small">Nome</label>' 
+    html += '<input type="text" class="form-control" value="teste" name="name'+n+'" id="validationCustom01" placeholder="Nome" required></div>' 
+    html += '<div class="col-3 input-group-sm">' 
+    html += '<label for="validationCustom01" class="small">Telefone</label>' 
+    html += '<input type="text" class="form-control" value="teste" name="phone'+n+'" id="validationCustom01" placeholder="Nome" required></div>' 
+    html += '<div class="col-3 input-group-sm mr-1">'
+    html += '<label for="validationCustom01" class="small">Email</label>' 
+    html += '<input type="text" class="form-control" value="teste" name="email'+n+'" id="validationCustom01" placeholder="Nome" required></div>' 
+    html += '<button type="button" id="removeRow" class="btn btn-danger btn-sm">Remover</button></div></div>';
+        
+    const fieldsContainer = $(".fieldsContainer")
     fieldsContainer.append(html)
-    $( "#addContacts input").each(function( index ) {
-        console.log( index + ": " + $( this ).text() );
-      });    
-    console.log ($(fieldsContainer.firstChildren))
-    }
+
+    }$(document).on('click', '#removeRow', function () {
+        $(this).closest('.form-row').remove();
+    });
+    
+
     function resetFields(){
         document.getElementById('name').value='';   
         document.getElementById('phone').value='';
