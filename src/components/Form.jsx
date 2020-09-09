@@ -14,23 +14,39 @@ export default function App() {
         resetFields()
         window.location.reload()
     }
-    function addContacts(e){
-        e.preventDefault()
-        console.log(this)
+    function addContactFields(){
+    let html = '<div class="form-group" id="addContacts"><div class="form-row">' +
+     '<div class="col-3 input-group-sm">' +
+     '<label for="validationCustom01" class="small">Nome</label>' +
+     '<input type="text" class="form-control" id="validationCustom01" placeholder="Nome" required></div>' +
+     '<div class="col-3 input-group-sm">' +
+     '<label for="validationCustom01" class="small">Telefone</label>' +
+     '<input type="text" class="form-control" id="validationCustom01" placeholder="Nome" required></div>' +
+     '<div class="col-3 input-group-sm mr-1">' +
+     '<label for="validationCustom01" class="small">Email</label>' +
+     '<input type="text" class="form-control" id="validationCustom01" placeholder="Nome" required></div>' +
+     '<button class="btn btn-danger btn-sm">Remover</button></div></div>';
+
+     const fieldsContainer = $(".fieldsContainer")
+    fieldsContainer.append(html)
+    $( "#addContacts input").each(function( index ) {
+        console.log( index + ": " + $( this ).text() );
+      });    
+    console.log ($(fieldsContainer.firstChildren))
     }
     function resetFields(){
-        document.getElementById('name').value='';
+        document.getElementById('name').value='';   
         document.getElementById('phone').value='';
         document.getElementById('email').value='';
     }
     const onSubmit = data => submit(data);
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
-            <div className="fieldsContainer" id="fieldsContainer">
             <Row form>
             <Col md={3}>
             <FormGroup>
-                <Label for="name">Nome</Label>
+                <Label for="name" className="small">Nome</Label>
+                <div className={"input-group-sm"}>
                 <input
                     className={"form-control"}
                     type="input"
@@ -40,12 +56,14 @@ export default function App() {
                     ref={register({
                         required: 'Por favor insira um nome.'})}
                 />
+                </div>
                 <ErrorMessage errors={errors} name="name" />
                 </FormGroup>
             </Col>
             <Col md={3}>
             <FormGroup>
-                <Label for="phone">Telefone</Label>
+                <Label for="phone" className="small">Telefone</Label>
+                <div className={"input-group-sm"}>
                 <input
                     className={"form-control"}
                     maxLength={14}
@@ -70,12 +88,14 @@ export default function App() {
                         })
                     }
                 />
+                </div>
                 <ErrorMessage errors={errors} name="phone" />
                 </FormGroup>
                 </Col>
                 <Col md={3}>
                 <FormGroup>
-                <Label for="email">Email</Label>
+                <Label for="email" className="small">Email</Label>
+                <div className={"input-group-sm"}>
                 <input
                     className={"form-control"}
                     type="text"
@@ -90,13 +110,14 @@ export default function App() {
                         }
                     })}
                 />
+                </div>
                 <ErrorMessage errors={errors} name="email" />
             </FormGroup>
              </Col>
             </Row>
+            <div className="fieldsContainer" id="fieldsContainer"></div>        
             <Button className={"btn-success mr-2"}>Salvar</Button>
-            <Button className={"btn-info"} onClick={addContacts}>+ Contatos</Button>
-        </div>            
+            <Button className={"btn-info addFields"} onClick={addContactFields}>+ Contatos</Button>
         </Form>
     );
 }
